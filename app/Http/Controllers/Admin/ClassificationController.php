@@ -24,7 +24,7 @@ class ClassificationController extends MainClassificationController
      */
     public function create()
     {
-        //
+        return view('admin.classification.create');
     }
 
     /**
@@ -32,7 +32,13 @@ class ClassificationController extends MainClassificationController
      */
     public function store(StoreClassificationRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $classification = new Classification;
+        $classification->name = $validated['name'];
+        if ($classification->save()) {
+            return redirect(route('admin.classification.index'));
+        }
     }
 
     /**
