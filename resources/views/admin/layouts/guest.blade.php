@@ -11,20 +11,49 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+        <style>
+            html,
+            body {
+            height: 100%;
+            }
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
+            body {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+            }
+
+            .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            }
+
+            .form-signin .form-floating:focus-within {
+            z-index: 2;
+            }
+
+            .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            }
+
+            .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            }
+
+        </style>
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    </head>
+    <body class="text-center">
+        <main class="form-signin w-100 m-auto">
+            {{ $slot }}
+        </main>
     </body>
 </html>
