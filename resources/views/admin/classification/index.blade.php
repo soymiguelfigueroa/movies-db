@@ -27,8 +27,8 @@
                             <td>{{ $classification->name }}</td>
                             <td>{{ $classification->created_at }}</td>
                             <td>
-                                <a href="{{ route('admin.classification.edit', $classification->id) }}" class="btn btn-secondary mb-1">{{ __('Edit') }}</a>
-                                <form action="{{ route('admin.classification.destroy', $classification->id) }}" method="POST" style="display: inline;">
+                                <a href="{{ route('admin.classification.edit', ['classification' => $classification->id]) }}" class="btn btn-secondary mb-1">{{ __('Edit') }}</a>
+                                <form action="{{ route('admin.classification.destroy', ['classification' => $classification->id]) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger mb-1" onclick="return confirm('{{ __('Do you want to delete this record?') }}')">{{ __('Delete') }}</button>

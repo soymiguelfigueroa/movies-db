@@ -45,7 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/classification/store', [AdminClassificationController::class, 'store'])->name('classification.store');
     Route::get('/classification/{classification}/edit', [AdminClassificationController::class, 'edit'])->name('classification.edit');
     Route::put('/classification/{classification}/update', [AdminClassificationController::class, 'update'])->name('classification.update');
-    Route::delete('/classification/{id}/destroy', [AdminClassificationController::class, 'destroy'])->name('classification.destroy');
+    Route::delete('/classification/{classification}/destroy', [AdminClassificationController::class, 'destroy'])->name('classification.destroy');
 });
 
 require __DIR__.'/auth.php';
