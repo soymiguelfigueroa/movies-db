@@ -75,6 +75,8 @@ class ClassificationController extends MainClassificationController
      */
     public function destroy(Classification $classification)
     {
-        //
+        if ($classification->delete()) {
+            return redirect(route('admin.classification.index'));
+        }
     }
 }
