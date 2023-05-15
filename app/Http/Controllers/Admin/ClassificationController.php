@@ -46,7 +46,7 @@ class ClassificationController extends MainClassificationController
      */
     public function show(Classification $classification)
     {
-        //
+        return view('admin.classification.show', compact('classification'));
     }
 
     /**

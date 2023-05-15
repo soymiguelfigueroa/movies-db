@@ -27,6 +27,7 @@
                             <td>{{ $classification->name }}</td>
                             <td>{{ $classification->created_at }}</td>
                             <td>
+                                <a href="{{ route('admin.classification.show', ['classification' => $classification->id]) }}" class="btn btn-secondary mb-1">{{ __('Show') }}</a>
                                 <a href="{{ route('admin.classification.edit', ['classification' => $classification->id]) }}" class="btn btn-secondary mb-1">{{ __('Edit') }}</a>
                                 <form action="{{ route('admin.classification.destroy', ['classification' => $classification->id]) }}" method="POST" style="display: inline;">
                                     @csrf
