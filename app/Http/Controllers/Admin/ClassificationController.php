@@ -54,7 +54,7 @@ class ClassificationController extends MainClassificationController
      */
     public function edit(Classification $classification)
     {
-        //
+        return view('admin.classification.edit', compact('classification'));
     }
 
     /**
@@ -62,7 +62,12 @@ class ClassificationController extends MainClassificationController
      */
     public function update(UpdateClassificationRequest $request, Classification $classification)
     {
-        //
+        $validated = $request->validated();
+
+        $classification->name = $validated['name'];
+        if ($classification->save()) {
+            return redirect(route('admin.classification.index'));
+        }
     }
 
     /**

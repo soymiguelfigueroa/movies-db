@@ -43,8 +43,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/classification', [AdminClassificationController::class, 'index'])->name('classification.index');
     Route::get('/classification/create', [AdminClassificationController::class, 'create'])->name('classification.create');
     Route::post('/classification/store', [AdminClassificationController::class, 'store'])->name('classification.store');
-    Route::get('/classification/{id}/edit', [AdminClassificationController::class, 'edit'])->name('classification.edit');
-    Route::put('/classification/{id}/update', [AdminClassificationController::class, 'update'])->name('classification.update');
+    Route::get('/classification/{classification}/edit', [AdminClassificationController::class, 'edit'])->name('classification.edit');
+    Route::put('/classification/{classification}/update', [AdminClassificationController::class, 'update'])->name('classification.update');
     Route::delete('/classification/{id}/destroy', [AdminClassificationController::class, 'destroy'])->name('classification.destroy');
 });
 
