@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Controller as AdminController;
 use App\Http\Controllers\Admin\ClassificationController as AdminClassificationController;
+use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
@@ -47,6 +48,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/classification/{classification}/edit', [AdminClassificationController::class, 'edit'])->name('classification.edit');
     Route::put('/classification/{classification}/update', [AdminClassificationController::class, 'update'])->name('classification.update');
     Route::delete('/classification/{classification}/destroy', [AdminClassificationController::class, 'destroy'])->name('classification.destroy');
+
+    Route::get('/genre', [AdminGenreController::class, 'index'])->name('genre.index');
+    Route::get('/genre/create', [AdminGenreController::class, 'create'])->name('genre.create');
+    Route::post('/genre/store', [AdminGenreController::class, 'store'])->name('genre.store');
+    Route::get('/genre/{genre}/show', [AdminGenreController::class, 'show'])->name('genre.show');
+    Route::get('/genre/{genre}/edit', [AdminGenreController::class, 'edit'])->name('genre.edit');
+    Route::put('/genre/{genre}/update', [AdminGenreController::class, 'update'])->name('genre.update');
+    Route::delete('/genre/{genre}/destroy', [AdminGenreController::class, 'destroy'])->name('genre.destroy');
 });
 
 require __DIR__.'/auth.php';

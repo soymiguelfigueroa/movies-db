@@ -15,6 +15,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('admin.classification.index') }}">{{ __('Classifications') }}</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.genre.index') }}">{{ __('Genres') }}</a></li>
             </ul>
           </li>
         </ul>
