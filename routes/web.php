@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Controller as AdminController;
 use App\Http\Controllers\Admin\ClassificationController as AdminClassificationController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
+use App\Http\Controllers\Admin\EmployeeController as AdminEmployeeController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
@@ -65,6 +66,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/role/{role}/edit', [AdminRoleController::class, 'edit'])->name('role.edit');
     Route::put('/role/{role}/update', [AdminRoleController::class, 'update'])->name('role.update');
     Route::delete('/role/{role}/destroy', [AdminRoleController::class, 'destroy'])->name('role.destroy');
+
+    Route::get('/employee', [AdminEmployeeController::class, 'index'])->name('employee.index');
+    Route::get('/employee/create', [AdminEmployeeController::class, 'create'])->name('employee.create');
+    Route::post('/employee/store', [AdminEmployeeController::class, 'store'])->name('employee.store');
+    Route::get('/employee/{employee}/show', [AdminEmployeeController::class, 'show'])->name('employee.show');
+    Route::get('/employee/{employee}/edit', [AdminEmployeeController::class, 'edit'])->name('employee.edit');
+    Route::put('/employee/{employee}/update', [AdminEmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/employee/{employee}/destroy', [AdminEmployeeController::class, 'destroy'])->name('employee.destroy');
 });
 
 require __DIR__.'/auth.php';
