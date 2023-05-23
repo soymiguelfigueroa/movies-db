@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Controller as AdminController;
 use App\Http\Controllers\Admin\ClassificationController as AdminClassificationController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
@@ -56,6 +57,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/genre/{genre}/edit', [AdminGenreController::class, 'edit'])->name('genre.edit');
     Route::put('/genre/{genre}/update', [AdminGenreController::class, 'update'])->name('genre.update');
     Route::delete('/genre/{genre}/destroy', [AdminGenreController::class, 'destroy'])->name('genre.destroy');
+
+    Route::get('/role', [AdminRoleController::class, 'index'])->name('role.index');
+    Route::get('/role/create', [AdminRoleController::class, 'create'])->name('role.create');
+    Route::post('/role/store', [AdminRoleController::class, 'store'])->name('role.store');
+    Route::get('/role/{role}/show', [AdminRoleController::class, 'show'])->name('role.show');
+    Route::get('/role/{role}/edit', [AdminRoleController::class, 'edit'])->name('role.edit');
+    Route::put('/role/{role}/update', [AdminRoleController::class, 'update'])->name('role.update');
+    Route::delete('/role/{role}/destroy', [AdminRoleController::class, 'destroy'])->name('role.destroy');
 });
 
 require __DIR__.'/auth.php';
