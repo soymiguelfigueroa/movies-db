@@ -19,6 +19,15 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{ $employee->name }}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label for="roles" class="form-label">{{ __('Role') }}*</label>
+                    <select name="roles[]" id="roles" class="form-control" multiple required>
+                        @foreach($roles as $role)
+                        <option value="{{ $role->id }}" {{ (in_array($role->id, $employee->showRolesIds())) ? 'selected' : '' }}>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-secondary">{{ __('Update') }}</button>
             </form>
         </div>

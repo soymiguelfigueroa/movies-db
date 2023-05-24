@@ -14,6 +14,7 @@
             <span class="d-block">{{ __('Name') . ': ' . $employee->name }}</span>
             <span class="d-block">{{ __('Created') . ': ' . $employee->created_at }}</span>
             <span class="d-block">{{ __('Updated') . ': ' . $employee->updated_at }}</span>
+            <span class="d-block">{{ __('Roles') . ': ' . $employee->showRoles() }}</span>
         </div>
         <div class="card-footer"></div>
     </div>

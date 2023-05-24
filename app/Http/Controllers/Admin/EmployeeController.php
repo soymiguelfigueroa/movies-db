@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController as MainEmployeeController;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
+use App\Models\Role;
 
 class EmployeeController extends MainEmployeeController
 {
@@ -24,7 +25,9 @@ class EmployeeController extends MainEmployeeController
      */
     public function create()
     {
-        return view('admin.employee.create');
+        $roles = Role::all();
+
+        return view('admin.employee.create', compact('roles'));
     }
 
     /**
@@ -37,6 +40,8 @@ class EmployeeController extends MainEmployeeController
         $employee = new Employee;
         $employee->name = $validated['name'];
         if ($employee->save()) {
+            $employee->roles()->attach($validated['roles']);
+            
             return redirect(route('admin.employee.index'));
         }
     }
@@ -54,7 +59,9 @@ class EmployeeController extends MainEmployeeController
      */
     public function edit(Employee $employee)
     {
-        return view('admin.employee.edit', compact('employee'));
+        $roles = Role::all();
+
+        return view('admin.employee.edit', compact('employee', 'roles'));
     }
 
     /**
@@ -66,6 +73,8 @@ class EmployeeController extends MainEmployeeController
 
         $employee->name = $validated['name'];
         if ($employee->save()) {
+            $employee->roles()->sync($validated['roles']);
+            
             return redirect(route('admin.employee.index'));
         }
     }
@@ -75,6 +84,8 @@ class EmployeeController extends MainEmployeeController
      */
     public function destroy(Employee $employee)
     {
+        $employee->roles()->detach();
+        
         if ($employee->delete()) {
             return redirect(route('admin.employee.index'));
         }
