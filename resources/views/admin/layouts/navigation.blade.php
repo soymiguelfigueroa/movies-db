@@ -10,6 +10,9 @@
             <a class="nav-link active" href="{{ route('admin.index') }}">{{ __('Dashboard') }}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" href="{{ route('admin.movie.index') }}">{{ __('Movies') }}</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" href="{{ route('admin.employee.index') }}">{{ __('Employees') }}</a>
           </li>
           <li class="nav-item dropdown">

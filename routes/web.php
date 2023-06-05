@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClassificationController as AdminClassificationCo
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\EmployeeController as AdminEmployeeController;
+use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
@@ -74,6 +75,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/employee/{employee}/edit', [AdminEmployeeController::class, 'edit'])->name('employee.edit');
     Route::put('/employee/{employee}/update', [AdminEmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employee/{employee}/destroy', [AdminEmployeeController::class, 'destroy'])->name('employee.destroy');
+
+    Route::get('/movie', [AdminMovieController::class, 'index'])->name('movie.index');
+    Route::get('/movie/create', [AdminMovieController::class, 'create'])->name('movie.create');
+    Route::post('/movie/store', [AdminMovieController::class, 'store'])->name('movie.store');
+    Route::get('/movie/{movie}/show', [AdminMovieController::class, 'show'])->name('movie.show');
+    Route::get('/movie/{movie}/edit', [AdminMovieController::class, 'edit'])->name('movie.edit');
+    Route::put('/movie/{movie}/update', [AdminMovieController::class, 'update'])->name('movie.update');
+    Route::delete('/movie/{movie}/destroy', [AdminMovieController::class, 'destroy'])->name('movie.destroy');
 });
 
 require __DIR__.'/auth.php';
