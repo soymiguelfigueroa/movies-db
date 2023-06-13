@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
 use App\Models\Classification;
 use App\Models\Genre;
+use App\Models\Role;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -30,8 +32,9 @@ class MovieController extends MainMovieController
     {
         $classifications = Classification::all();
         $genres = Genre::all();
+        $roles = Role::all();
 
-        return view('admin.movie.create', compact('classifications', 'genres'));
+        return view('admin.movie.create', compact('classifications', 'genres', 'roles'));
     }
 
     /**
@@ -40,7 +43,7 @@ class MovieController extends MainMovieController
     public function store(StoreMovieRequest $request)
     {
         $validated = $request->validated();
-
+        dd($validated);
         $movie = new Movie;
         $movie->name = $validated['name'];
         $movie->year = $validated['year'];
@@ -118,5 +121,18 @@ class MovieController extends MainMovieController
         if ($movie->delete()) {
             return redirect(route('admin.movie.index'));
         }
+    }
+
+    /**
+     * Retrieves employees by role
+     *
+     * @param Role $role
+     * @return json
+     */
+    public function get_employees_from_role(Role $role)
+    {
+        $employees = $role->employees->toArray();
+
+        return response()->json(compact('employees'));
     }
 }

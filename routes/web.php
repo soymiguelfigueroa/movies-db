@@ -83,6 +83,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/movie/{movie}/edit', [AdminMovieController::class, 'edit'])->name('movie.edit');
     Route::put('/movie/{movie}/update', [AdminMovieController::class, 'update'])->name('movie.update');
     Route::delete('/movie/{movie}/destroy', [AdminMovieController::class, 'destroy'])->name('movie.destroy');
+
+    Route::get('/movie/get_employees_from_role/{role}', [AdminMovieController::class, 'get_employees_from_role'])->name('movie.get_employees_from_role');
 });
 
 require __DIR__.'/auth.php';

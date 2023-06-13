@@ -25,7 +25,7 @@
                     </div>
                     
                     <div class="mb-3 col-2">
-                        <label for="duration" class="form-label">{{ __('Duration (minutes)') }}*</label>
+                        <label for="duration" class="form-label">{{ __('Duration') }}*</label>
                         <input type="number" class="form-control" id="duration" name="duration" required>
                     </div>
                     
@@ -72,6 +72,33 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="role-id" class="form-label">{{ __('Role') }}*</label>
+                        <select name="role_id" id="role-id" class="form-control" required>
+                            <option value="">{{ __('Select a role') }}</option>
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}"  data-href="{{ route('admin.movie.get_employees_from_role', ['role' => $role->id]) }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-6">
+                        <label for="employees" class="form-label">{{ __('Employees') }}*</label>
+                        <select name="employees[]" id="employees" class="form-control" multiple disabled required>
+                            <option value="">{{ __('You need to select a role') }}</option>
+                        </select>
+                        <button type="button" class="btn btn-secondary my-2" id="btn-add-to-list">{{ __('Add to list') }}</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-12">
+                        <label for="employees-list" class="form-label">{{ __('Employees list') }}*</label>
+                        <input type="text" name="employees_list" id="empoyees-list" class="form-control" />
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-secondary">{{ __('Store') }}</button>
             </form>
         </div>
@@ -80,4 +107,63 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+<script>
+    let $select_role = document.getElementById("role-id");
+    let $select_employees = document.getElementById('employees');
+    let $btn_add_to_list = document.getElementById('btn-add-to-list');
+    let employees_selected = [];
+
+    $select_role.addEventListener('change', (event) => {
+        let role_id = $select_role.value;
+        let href = event.target.options[event.target.selectedIndex].dataset.href;
+
+        // Disabling select
+        $select_employees.setAttribute("disabled", "disabled");
+
+        if (role_id) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                let response = JSON.parse(this.response);
+                
+                if (response.employees) {
+                    // Cleaning options
+                    let i, L = $select_employees.options.length - 1;
+                    for(i = L; i >= 0; i--) {
+                        $select_employees.remove(i);
+                    }
+                    // Adding options
+                    response.employees.map(item => $select_employees.appendChild(new Option(item.name, item.id)).cloneNode(true));
+                    // Enabling select
+                    $select_employees.removeAttribute("disabled");
+                }
+            }
+            xhttp.open("GET", href);
+            xhttp.send(); 
+        }
+    });
+
+    $btn_add_to_list.addEventListener('click', (event) => {
+        let employees = getSelectValues($select_employees);
+        let $input_empoyees_list = document.getElementById('empoyees-list');
+        $input_empoyees_list.value = employees.toString();
+    });
+
+    function getSelectValues(select) {
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+            result.push(opt.value || opt.text);
+            }
+        }
+        return result;
+    }
+</script>
 @endsection

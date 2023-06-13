@@ -31,6 +31,7 @@ class StoreMovieRequest extends FormRequest
             'synopsis' => 'string',
             'classification_id' => 'integer',
             'genre' => 'array',
+            'employees' => 'array',
         ];
     }
 }

@@ -24,6 +24,11 @@ class Movie extends Model
         return $this->belongsToMany(Genre::class);
     }
 
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(Employee::class);
+    }
+
     protected function cover(): Attribute
     {
         return Attribute::make(
